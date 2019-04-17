@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import { Button, View, Text } from 'react-native'
 import styles from './homescreenStyles'
 import generalStyles from './generalStyles'
@@ -23,5 +24,12 @@ class HomeScreen extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  state
+})
 
-export default HomeScreen
+const mapDispatchToProps = (dispatch) => ({
+  dispatch
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen)
