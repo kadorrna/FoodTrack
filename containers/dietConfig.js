@@ -17,9 +17,9 @@ class DietConfig extends React.Component {
       fruits: 0,
       carbohydrates: 0,
       snatch: 0,
-      showFruitsError: false,
-      showCarbohydratesError: false,
-      showSnatchError: false,
+      fruitsError: undefined,
+      carbohydratesError: undefined,
+      snatchError: undefined,
       isSubmitted: false,
     };
   }
@@ -30,36 +30,41 @@ class DietConfig extends React.Component {
 
   saveDiet = async() => {
     const {fruits, carbohydrates, snatch} = this.state
-    this.setState({ submitted: true })
-    if (this.isValidNumber(fruits) 
-    && this.isValidNumber(carbohydrates) 
-    && this.isValidNumber(snatch)) {
+    let hasError = false;
+
+    if (!this.isValidNumber(fruits)) {
+      this.setState({fruitsError: 'Only Numbers'})
+      hasError = true
+    }
+    
+    if (!this.isValidNumber(carbohydrates)){
+      this.setState({carbohydratesError: 'Only Numbers'})
+      hasError = true
+    }
+
+    if (!this.isValidNumber(snatch)) {
+      this.setState({snatchError: 'Only Numbers'})
+      hasError = true
+    }
+
+    if (!hasError){
       await AsyncStorage.multiSet([
         ['@FoodTruck:CarbohydratesMax',carbohydrates],
         ['@FoodTruck:SnatchMax',snatch], 
         ['@FoodTruck:FruitsMax',fruits], 
       ])
-      this.setState({isSubmitted: true})
+      this.setState({
+        isSubmitted: true,
+        snatchError: undefined,
+        carbohydratesError: undefined,
+        fruitsError: undefined
+      })
     } else {
-      if(!this.isValidNumber(fruits)){
-        this.setState({showFruitsError: true})
-      }
-      if(!this.isValidNumber(carbohydrates)){
-        this.setState({showCarbohydratesError: true})
-      }
-      if(!this.isValidNumber(snatch)){
-        this.setState({showSnatchError: true})
-      }
-      console.log('No deberia submiterar')
-
+      this.setState({isSubmitted: false})
     }
-
   }
 
-
   render() {
-    // const {name}= this.props.navigation.state.params
-    // const {navigate}= this.props.navigation
     return (
       <View style={generalStyles.container}>
         <View style={styles.row}>
@@ -67,8 +72,8 @@ class DietConfig extends React.Component {
             label="Frutas"
             onChangeText={(fruits) => this.setState({ fruits })}
             keyboardType="numeric"
-            errorStyle={[this.state.showFruitsError ? {display:'flex'} : {display:'none'},  { color: 'red' }]}
-            errorMessage='Only numbers'
+            errorStyle={{color: 'red' }}
+            errorMessage={this.state.fruitsError ? this.state.fruitsError : undefined}
           />
         </View>
         <View style={styles.row}>
@@ -76,8 +81,8 @@ class DietConfig extends React.Component {
             label="Carbohidratos"
             onChangeText={(carbohydrates) => this.setState({ carbohydrates })}
             keyboardType="numeric"
-            errorStyle={[this.state.showCarbohydratesError ? {display:'flex'} : {display:'none'},  { color: 'red' }]}
-            errorMessage='Only numbers'
+            errorStyle={{color: 'red' }}
+            errorMessage={this.state.carbohydratesError ? this.state.carbohydratesError : undefined }
           />
         </View>
         <View style={styles.row}>
@@ -86,8 +91,8 @@ class DietConfig extends React.Component {
             style={styles.inputs}
             onChangeText={(snatch) => this.setState({ snatch })}
             keyboardType="numeric"
-            errorStyle={[this.state.showSnatchError ? {display:'flex'} : {display:'none'},  { color: 'red' }]}
-            errorMessage='Only numbers'
+            errorStyle={{color: 'red'}}
+            errorMessage={this.state.snatchError ? this.state.snatchError : undefined  }
           />
         </View>
         <View>
@@ -101,7 +106,7 @@ class DietConfig extends React.Component {
           </Text>
           </TouchableOpacity>
           <Text 
-            style= {[this.state.submitted ? {display:'flex'} : {display:'none'},  { color: 'red' }]}>
+            style= {[this.state.isSubmitted ? {display:'flex'} : {display:'none'},  { color: 'red' }]}>
             Guardado Correctamente
           </Text>
         </View>
