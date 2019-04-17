@@ -5,7 +5,7 @@
  * @format
  * @flow
  */
-
+import React from 'react'
 import { createStackNavigator, createAppContainer } from 'react-navigation'
 import {initStore} from './redux/store';
 import {Provider} from 'react-redux';
