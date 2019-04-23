@@ -15,10 +15,10 @@ class DietConfig extends React.Component {
     super(props);
     this.state = {
       fruits: 0,
-      carbohydrates: 0,
+      carbo: 0,
       snatch: 0,
       fruitsError: undefined,
-      carbohydratesError: undefined,
+      carboError: undefined,
       snatchError: undefined,
       isSubmitted: false,
     };
@@ -29,7 +29,7 @@ class DietConfig extends React.Component {
   }
 
   saveDiet = async() => {
-    const {fruits, carbohydrates, snatch} = this.state
+    const {fruits, carbo, snatch} = this.state
     let hasError = false;
 
     if (!this.isValidNumber(fruits)) {
@@ -37,8 +37,8 @@ class DietConfig extends React.Component {
       hasError = true
     }
     
-    if (!this.isValidNumber(carbohydrates)){
-      this.setState({carbohydratesError: 'Only Numbers'})
+    if (!this.isValidNumber(carbo)){
+      this.setState({carboError: 'Only Numbers'})
       hasError = true
     }
 
@@ -49,14 +49,14 @@ class DietConfig extends React.Component {
 
     if (!hasError){
       await AsyncStorage.multiSet([
-        ['@FoodTruck:CarbohydratesMax',carbohydrates],
+        ['@FoodTruck:carboMax',carbo],
         ['@FoodTruck:SnatchMax',snatch], 
         ['@FoodTruck:FruitsMax',fruits], 
       ])
       this.setState({
         isSubmitted: true,
         snatchError: undefined,
-        carbohydratesError: undefined,
+        carboError: undefined,
         fruitsError: undefined
       })
     } else {
@@ -67,7 +67,7 @@ class DietConfig extends React.Component {
   render() {
     return (
       <View style={generalStyles.container}>
-        <View style={styles.row}>
+        <View style={[generalStyles.row, styles.row]}>
           <Input
             label="Frutas"
             onChangeText={(fruits) => this.setState({ fruits })}
@@ -76,16 +76,16 @@ class DietConfig extends React.Component {
             errorMessage={this.state.fruitsError ? this.state.fruitsError : undefined}
           />
         </View>
-        <View style={styles.row}>
+        <View style={[generalStyles.row, styles.row]}>
           <Input
             label="Carbohidratos"
-            onChangeText={(carbohydrates) => this.setState({ carbohydrates })}
+            onChangeText={(carbo) => this.setState({ carbo })}
             keyboardType="numeric"
             errorStyle={{color: 'red' }}
-            errorMessage={this.state.carbohydratesError ? this.state.carbohydratesError : undefined }
+            errorMessage={this.state.carboError ? this.state.carboError : undefined }
           />
         </View>
-        <View style={styles.row}>
+        <View style={[generalStyles.row, styles.row]}>
           <Input
             label="Almidon"
             style={styles.inputs}
@@ -98,7 +98,7 @@ class DietConfig extends React.Component {
         <View>
 
         </View>
-        <View style={styles.row}>
+        <View style={[generalStyles.row, styles.row]}>
           <TouchableOpacity style={[generalStyles.generalOpacity, styles.button]}
             onPress={() => this.saveDiet()}>
             <Text style={[generalStyles.generalOpacityText, styles.buttonText]}>

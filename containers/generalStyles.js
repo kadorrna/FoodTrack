@@ -6,6 +6,11 @@ const generalStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  row: {
+    flexDirection: 'row',
+    textAlign: 'center',
+    justifyContent: 'center',
+  },
   generalOpacityText: {
     fontSize: 16,
     fontWeight: '600',

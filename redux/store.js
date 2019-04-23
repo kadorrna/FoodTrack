@@ -1,4 +1,5 @@
-import {createStore, compose/* , applyMiddleware*/} from 'redux';
+import {createStore, compose /*, applyMiddleware*/} from 'redux'
+
 // import someReduxMiddleware from 'some-redux-middleware';
 // import someOtherReduxMiddleware from 'some-other-redux-middleware';
 import rootReducer from './reducers/root.reducer';

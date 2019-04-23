@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
-import dietConfig from '../actions/dietConfig.reducer'
+import dayTrack from '../actions/dayTrack.reducer'
 
 export default combineReducers({
-  dietConfig
+  dayTrack
 });
