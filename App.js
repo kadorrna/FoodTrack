@@ -27,16 +27,10 @@ const MainNavigator = createStackNavigator({
 
 export const Appcontainer = createAppContainer(MainNavigator)
 
-export function setupReduxContainer(component) {
-  const Container = component;
-
-  return connect(
-    state => ({ ...state })
-  )(props => <Container {...props} />);
-}
-
-export default () => (
+export default () => {
+  return(
   <Provider store={store}>
     <Appcontainer />
-  </Provider>
-)
+  </Provider> 
+  )
+}
