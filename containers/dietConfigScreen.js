@@ -1,12 +1,14 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { View, Text, TouchableOpacity } from 'react-native'
-import { AsyncStorage } from '@react-native-community/async-storage'
 import { Input } from 'react-native-elements'
-import styles from './dietConfigStyles'
-import generalStyles from './generalStyles'
+import actions from '../redux/actions/'
+import styles from './dietConfigScreenStyles'
+import generalStyles from '../generalStyles'
+import { constants } from '../constants';
 
 
-class DietConfig extends React.Component {
+class DietConfigScreen extends React.Component {
   static navigationOptions = {
     title: 'Diet Config',
   };
@@ -14,9 +16,9 @@ class DietConfig extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      fruits: 0,
-      carbo: 0,
-      snatch: 0,
+      [constants.fruits]: this.props[constants.fruits+'MAX'],
+      [constants.snatch]: this.props[constants.snatch+'MAX'],
+      [constants.carbo]: this.props[constants.carbo+'MAX'],
       fruitsError: undefined,
       carboError: undefined,
       snatchError: undefined,
@@ -28,7 +30,7 @@ class DietConfig extends React.Component {
     return !isNaN(value)
   }
 
-  saveDiet = async() => {
+  saveDiet = () => {
     const {fruits, carbo, snatch} = this.state
     let hasError = false;
 
@@ -48,17 +50,13 @@ class DietConfig extends React.Component {
     }
 
     if (!hasError){
-      await AsyncStorage.multiSet([
-        ['@FoodTruck:carboMax',carbo],
-        ['@FoodTruck:SnatchMax',snatch], 
-        ['@FoodTruck:FruitsMax',fruits], 
-      ])
       this.setState({
         isSubmitted: true,
         snatchError: undefined,
         carboError: undefined,
         fruitsError: undefined
       })
+      this.props.savediet({[constants.fruits+'MAX']:fruits, [constants.carbo+'MAX']:carbo, [constants.snatch+'MAX']:snatch})
     } else {
       this.setState({isSubmitted: false})
     }
@@ -74,7 +72,9 @@ class DietConfig extends React.Component {
             keyboardType="numeric"
             errorStyle={{color: 'red' }}
             errorMessage={this.state.fruitsError ? this.state.fruitsError : undefined}
-          />
+          >
+            {this.state[constants.fruits]}
+          </Input>
         </View>
         <View style={[generalStyles.row, styles.row]}>
           <Input
@@ -83,7 +83,9 @@ class DietConfig extends React.Component {
             keyboardType="numeric"
             errorStyle={{color: 'red' }}
             errorMessage={this.state.carboError ? this.state.carboError : undefined }
-          />
+          >
+            {this.state[constants.carbo]}
+          </Input>
         </View>
         <View style={[generalStyles.row, styles.row]}>
           <Input
@@ -93,7 +95,9 @@ class DietConfig extends React.Component {
             keyboardType="numeric"
             errorStyle={{color: 'red'}}
             errorMessage={this.state.snatchError ? this.state.snatchError : undefined  }
-          />
+          >
+          {this.state[constants.snatch]}
+          </Input>
         </View>
         <View>
 
@@ -115,4 +119,7 @@ class DietConfig extends React.Component {
   }
 }
 
-export default DietConfig
+const mapStateToProps = (state) => state.dietConfig
+const mapDispatchToProps = actions
+
+export default connect(mapStateToProps, mapDispatchToProps)(DietConfigScreen)

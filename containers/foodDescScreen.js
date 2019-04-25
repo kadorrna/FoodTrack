@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 import { IndicatorViewPager, PagerDotIndicator } from 'rn-viewpager';
-import FruitsScreen from '../foodDescriptionViews/fruitsScreen'
+import FruitsScreen from '../components/foodDescriptionViews/fruitsScreen'
 
 class FoodDescScreen extends React.Component {
   static navigationOptions = {

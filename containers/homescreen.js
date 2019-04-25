@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, View, Text } from 'react-native'
 import styles from './homescreenStyles'
-import generalStyles from './generalStyles'
+import generalStyles from '../generalStyles'
 
 class HomeScreen extends React.Component {
   static navigationOptions = {

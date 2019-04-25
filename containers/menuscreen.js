@@ -1,7 +1,7 @@
 import React from 'react'
 import { TouchableOpacity, View, Text } from 'react-native'
 import styles from './menuscreenStyles'
-import generalStyles from './generalStyles'
+import generalStyles from '../generalStyles'
 
 class MenuScreen extends React.Component {
   static navigationOptions = {

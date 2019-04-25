@@ -1,12 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { View } from 'react-native'
-import { Button, Text, Tooltip } from 'react-native-elements'
 import actions from '../redux/actions/'
-import generalStyles from './generalStyles'
-import styles from './dayTrackScreenStyles'
+import generalStyles from '../generalStyles'
 import { constants } from '../constants'
-
+import DayTrackRow from '../components/dayTrackRow/dayTrackRow';
 
 class DayTrackScreen extends React.Component {
   static navigationOptions = {
@@ -29,66 +27,26 @@ class DayTrackScreen extends React.Component {
   }
 
   render() {
-    const { navigate } = this.props.navigation;
     return (
       <View style={generalStyles.container}>
-        <View style={[generalStyles.row, styles.row ]}>
-          <Button
-            title="-"
-            type="outline"
-            onPress={(e) => this.subtractFood(constants.fruits)}
-          />
-          <View style={styles.textWrapper}>
-            <Tooltip popover={<Text>Fruits</Text>}>
-              <Text style={styles.quantityText} >
-                {this.props.fruits}
-              </Text>
-            </Tooltip>
-          </View>
-          <Button
-            title="+"
-            type="outline"
-            onPress={(e) => this.addFood(constants.fruits)}
-          />
-        </View>
-        <View style={[generalStyles.row, styles.row ]}>
-          <Button
-            title="-"
-            type="outline"
-            onPress={(e) => this.subtractFood(constants.carbo)}
-          />
-          <View style={styles.textWrapper}>
-            <Tooltip popover={<Text>Carbohydrates</Text>}>
-              <Text style={styles.quantityText} >
-                {this.props.carbo}
-              </Text>
-            </Tooltip>
-          </View>
-          <Button
-            title="+"
-            type="outline"
-            onPress={(e) => this.addFood(constants.carbo)}
-          />
-        </View>
-        <View style={[generalStyles.row, styles.row ]}>
-          <Button
-            title="-"
-            type="outline"
-            onPress={(e) => this.subtractFood(constants.snatch)}
-          />
-          <View style={styles.textWrapper}>
-            <Tooltip popover={<Text>Snatch</Text>}>
-              <Text style={styles.quantityText} >
-                {this.props.snatch}
-              </Text>
-            </Tooltip>
-          </View>
-          <Button
-            title="+"
-            type="outline"
-            onPress={(e) => this.addFood(constants.snatch)}
-          />
-        </View>
+        <DayTrackRow
+          description={constants.fruits}
+          propValue={this.props[constants.fruits]}
+          increment={() => { this.addFood(constants.fruits) }}
+          decrement={() => {this.subtractFood(constants.fruits) }}
+        />
+        <DayTrackRow
+          description={constants.carbo}
+          propValue={this.props[constants.carbo]}
+          increment={() => { this.addFood(constants.carbo) }}
+          decrement={() => {this.subtractFood(constants.carbo) }}
+        />
+        <DayTrackRow
+          description={constants.snatch}
+          propValue={this.props[constants.snatch]}
+          increment={() => { this.addFood(constants.snatch) }}
+          decrement={() => {this.subtractFood(constants.snatch) }}
+        />
       </View>
     );
   }
