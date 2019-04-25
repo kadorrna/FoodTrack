@@ -1,5 +1,5 @@
 export const constants = {
-  carbo: 'carbo',
+  carbo: 'carbohydrates',
   fruits: 'fruits',
   snatch: 'snatch',
 }
