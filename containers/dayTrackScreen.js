@@ -4,18 +4,18 @@ import { View } from 'react-native'
 import actions from '../redux/actions/'
 import generalStyles from '../generalStyles'
 import { constants } from '../constants'
-import DayTrackRow from '../components/dayTrackRow/dayTrackRow';
+import DayTrackRow from '../components/dayTrackRow/dayTrackRow'
 
 class DayTrackScreen extends React.Component {
   static navigationOptions = {
     title: 'Day Track',
-  };
+  }
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       errorLoading: false,
-    };
+    }
   }
 
   addFood = (foodType) => {
@@ -48,7 +48,7 @@ class DayTrackScreen extends React.Component {
           decrement={() => {this.subtractFood(constants.snatch) }}
         />
       </View>
-    );
+    )
   }
 }
 

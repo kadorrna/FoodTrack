@@ -27,7 +27,7 @@ class DayTrackRow extends React.Component {
           onPress={increment}
         />
       </View>
-    );
+    )
   }
 }
 

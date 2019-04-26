@@ -8,10 +8,7 @@ export const INITIAL_STATE = {
   [constants.carbo + 'MAX']: 0,
 }
 
-export const save = (state = INITIAL_STATE, {data}) => {
-  console.log('LALAL', data)
-  return { ...state, ...data }
-}
+export const save = (state = INITIAL_STATE, {data}) => ({ ...state, ...data })
 
 export const HANDLERS = {
   [Types.SAVEDIET]: save,

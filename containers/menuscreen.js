@@ -6,7 +6,7 @@ import generalStyles from '../generalStyles'
 class MenuScreen extends React.Component {
   static navigationOptions = {
     title: 'Menu',
-  };
+  }
   render() {
     const {name}= this.props.navigation.state.params
     const {navigate}= this.props.navigation
@@ -33,7 +33,7 @@ class MenuScreen extends React.Component {
           </Text>
         </TouchableOpacity>
       </View>
-    );
+    )
   }
 }
 
