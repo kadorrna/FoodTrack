@@ -20,7 +20,7 @@ if(__DEV__) {
   import('./ReactotronConfig').then(() => console.log('Reactotron Configured'))
 }
 
-const store = initStore();
+const store = initStore()
 
 const MainNavigator = createStackNavigator({
   Home: { screen: HomeScreen },

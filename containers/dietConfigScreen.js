@@ -5,16 +5,16 @@ import { Input } from 'react-native-elements'
 import actions from '../redux/actions/'
 import styles from './dietConfigScreenStyles'
 import generalStyles from '../generalStyles'
-import { constants } from '../constants';
+import { constants } from '../constants'
 
 
 class DietConfigScreen extends React.Component {
   static navigationOptions = {
     title: 'Diet Config',
-  };
+  }
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       [constants.fruits]: this.props[constants.fruits+'MAX'],
       [constants.snatch]: this.props[constants.snatch+'MAX'],
@@ -23,7 +23,7 @@ class DietConfigScreen extends React.Component {
       carboError: undefined,
       snatchError: undefined,
       isSubmitted: false,
-    };
+    }
   }
 
   isValidNumber = value => {
@@ -32,7 +32,7 @@ class DietConfigScreen extends React.Component {
 
   saveDiet = () => {
     const {fruits, carbo, snatch} = this.state
-    let hasError = false;
+    let hasError = false
 
     if (!this.isValidNumber(fruits)) {
       this.setState({fruitsError: 'Only Numbers'})
@@ -115,7 +115,7 @@ class DietConfigScreen extends React.Component {
           </Text>
         </View>
       </View>
-    );
+    )
   }
 }
 

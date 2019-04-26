@@ -21,6 +21,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#656565',
   },
-});
+})
 
 export default FruitsScreen

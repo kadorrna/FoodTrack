@@ -18,4 +18,4 @@ const initStore = () => createStore(rootReducer, {}, composedEnhancer);
 
 module.exports = {
   initStore
-};
+}

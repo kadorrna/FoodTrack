@@ -1,12 +1,12 @@
 import React from 'react'
 import { View, Text } from 'react-native'
-import { IndicatorViewPager, PagerDotIndicator } from 'rn-viewpager';
+import { IndicatorViewPager, PagerDotIndicator } from 'rn-viewpager'
 import FruitsScreen from '../components/foodDescriptionViews/fruitsScreen'
 
 class FoodDescScreen extends React.Component {
   static navigationOptions = {
     title: 'Food Description',
-  };
+  }
   render() {
     return (
       <View style={{flex: 1}}>
@@ -29,7 +29,7 @@ class FoodDescScreen extends React.Component {
   }
 
   _renderDotIndicator() {
-    return <PagerDotIndicator style={{ position: 'absolute', bottom: 50 }} pageCount={3} />;
+    return <PagerDotIndicator style={{ position: 'absolute', bottom: 50 }} pageCount={3} />
   }
 
 }
