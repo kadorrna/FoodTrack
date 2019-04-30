@@ -7,6 +7,8 @@
  */
 import React from 'react'
 import { createStackNavigator, createAppContainer } from 'react-navigation'
+import { PersistGate } from 'redux-persist/integration/react'
+import { persistor } from './redux/store'
 import {initStore} from './redux/store';
 import {Provider} from 'react-redux';
 import HomeScreen from './containers/homescreen'
@@ -35,7 +37,9 @@ export const Appcontainer = createAppContainer(MainNavigator)
 export default () => {
   return(
   <Provider store={store}>
-    <Appcontainer />
+    <PersistGate loading={null} persistor={persistor}>
+      <Appcontainer />
+    </PersistGate>
   </Provider> 
   )
 }
