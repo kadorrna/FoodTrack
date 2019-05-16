@@ -6,17 +6,9 @@ import styles from './progressButtonBarStyles'
 
 class ProgressButtonBar extends React.Component {
 
-  constructor(props) {
-    super(props);
-    const { type, quantity, startColor, endColor } = this.props
-    let object = {}
-    let startColorGradient = startColor ? startColor : "#7e93f5"
-    let endColorGradient = endColor ? endColor : "#f32b65"
-    const colors = gradient([
-      startColorGradient,
-      endColorGradient,
-    ], quantity)
 
+  initEmptyObject = (quantity, type) => {
+    let object = {}
     for (let index = 0; index < quantity; index++) {
       object[type + '-' + index] = {
         disable: styles.disable,
@@ -24,9 +16,42 @@ class ProgressButtonBar extends React.Component {
         class: 'disable'
       }
     }
+    return object;
+  }
 
+  initObject = (quantity, type, actualValue=0) => {
+    let object = {}
+    if (actualValue === 0){
+      for (let index = 0; index < quantity; index++) {
+        object[type + '-' + index] = {
+          disable: styles.disable,
+          enable: { backgroundColor: "yellow" },
+          class: 'disable'
+        }
+      }
+    } else {
+      for (let index = 0; index < quantity; index++) {
+        object[type + '-' + index] = {
+          disable: styles.disable,
+          enable: { backgroundColor: "yellow" },
+          class: index < actualValue ? 'enable' : 'disable'
+        }
+      }
+    }
+    return object;
+  }
+
+  constructor(props) {
+    super(props);
+    const { type, quantity, startColor, endColor, actualValue } = this.props
+    let startColorGradient = startColor ? startColor : "#7e93f5"
+    let endColorGradient = endColor ? endColor : "#f32b65"
+    const colors = gradient([
+      startColorGradient,
+      endColorGradient,
+    ], quantity)
     this.state = {
-      ...object,
+      ...this.initObject(quantity, type, actualValue),
       colors
     };
   }

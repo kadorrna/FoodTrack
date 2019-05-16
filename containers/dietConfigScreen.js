@@ -16,50 +16,20 @@ class DietConfigScreen extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      [constants.fruits]: this.props[constants.fruits + 'MAX'],
-      [constants.snatch]: this.props[constants.snatch + 'MAX'],
-      [constants.carbo]: this.props[constants.carbo + 'MAX'],
-      fruitsError: undefined,
-      carboError: undefined,
-      snatchError: undefined,
+      fruits: this.props[constants.fruits + 'MAX'],
+      snatch: this.props[constants.snatch + 'MAX'],
+      carbo: this.props[constants.carbo + 'MAX'],
       isSubmitted: false,
     }
   }
 
-  isValidNumber = value => {
-    return !isNaN(value)
-  }
-
   saveDiet = () => {
     const { fruits, carbo, snatch } = this.state
-    let hasError = false
 
-    if (!this.isValidNumber(fruits)) {
-      this.setState({ fruitsError: 'Only Numbers' })
-      hasError = true
-    }
-
-    if (!this.isValidNumber(carbo)) {
-      this.setState({ carboError: 'Only Numbers' })
-      hasError = true
-    }
-
-    if (!this.isValidNumber(snatch)) {
-      this.setState({ snatchError: 'Only Numbers' })
-      hasError = true
-    }
-
-    if (!hasError) {
-      this.setState({
-        isSubmitted: true,
-        snatchError: undefined,
-        carboError: undefined,
-        fruitsError: undefined
-      })
-      this.props.savediet({ [constants.fruits + 'MAX']: fruits, [constants.carbo + 'MAX']: carbo, [constants.snatch + 'MAX']: snatch })
-    } else {
-      this.setState({ isSubmitted: false })
-    }
+    this.setState({
+      isSubmitted: true,
+    })
+    this.props.savediet({ [constants.fruits + 'MAX']: fruits, [constants.carbo + 'MAX']: carbo, [constants.snatch + 'MAX']: snatch })
   }
 
   render() {
@@ -69,19 +39,23 @@ class DietConfigScreen extends React.Component {
           description='Frutas'
           quantity={6}
           type={constants.fruits}
-          update ={val => this.setState({fruits: val})}
+          actualValue={this.state.fruits}
+          update={val => this.setState({ fruits: val })}
         />
         <ProgressButtonBar
           description='Carbohidratos'
           quantity={10}
           type={constants.carbo}
-          update ={val => this.setState({carbo: val})}
+          actualValue={this.state.carbo}
+          update={val => this.setState({ carbo: val })}
         />
 
         <ProgressButtonBar
           description='Almidon'
           quantity={10}
-          update ={val => this.setState({snatch: val})}
+          type={constants.snatch}
+          actualValue={this.state.snatch}
+          update={val => this.setState({ snatch: val })}
         />
 
         <View>
