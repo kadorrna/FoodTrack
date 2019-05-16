@@ -13,6 +13,8 @@ const styles = StyleSheet.create({
   },
   row:{
     width: 200,
+    textAlign: 'center',
+    justifyContent: 'center',
   }
 })
 

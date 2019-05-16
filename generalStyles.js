@@ -8,8 +8,6 @@ const generalStyles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
-    textAlign: 'center',
-    justifyContent: 'center',
   },
   generalOpacityText: {
     fontSize: 16,
