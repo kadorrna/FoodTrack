@@ -69,18 +69,20 @@ class DietConfigScreen extends React.Component {
           description='Frutas'
           quantity={6}
           type={constants.fruits}
+          update ={val => this.setState({fruits: val})}
         />
-        {/* <ProgressButtonBar
+        <ProgressButtonBar
           description='Carbohidratos'
           quantity={10}
           type={constants.carbo}
+          update ={val => this.setState({carbo: val})}
         />
 
         <ProgressButtonBar
           description='Almidon'
           quantity={10}
-          type={constants.snatch}
-        /> */}
+          update ={val => this.setState({snatch: val})}
+        />
 
         <View>
 

@@ -50,13 +50,16 @@ class ProgressButtonBar extends React.Component {
   }
 
   setValue = (position) => {
-    const { type } = this.props
+    let returnValue = position
+    const { type, update } = this.props
     const status = this.state[type + '-' + position].class
     if (status === 'disable') {
       this.enableMinor(position)
+      returnValue++
     } else {
       this.disableMayor(position)
     }
+    update(returnValue)
   }
 
   render() {
