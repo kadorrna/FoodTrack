@@ -33,7 +33,7 @@ class ProgressChart extends React.PureComponent {
 
       return (
           <PieChart
-              style={ { height: 200 } }
+              style={ { height: 200, width: 200 } }
               data={ pieData }
           />
       )
