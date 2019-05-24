@@ -5,7 +5,7 @@ import actions from '../redux/actions/'
 import generalStyles from '../generalStyles'
 import { constants } from '../constants'
 import DayTrackRow from '../components/dayTrackRow/dayTrackRow'
-import ProgressChart  from '../components/progressChart/progressChart'
+import DayProgress  from '../components/dayProgress/dayProgress'
 
 class DayTrackScreen extends React.Component {
   static navigationOptions = {
@@ -27,20 +27,33 @@ class DayTrackScreen extends React.Component {
     this.props.decrement(foodType)
   }
 
+  getTypeProgress = (foodType) => {
+    if ((this.props.dietConfig[foodType + 'MAX'] && this.props.dietConfig[foodType + 'MAX'] !== 0) &&
+      (this.props.dayTrack[foodType] && this.props.dayTrack[foodType] !== 0)) {
+
+      return (this.props.dietConfig[foodType + 'MAX'] * 100) / this.props.dayTrack[foodType]
+    } else {
+      return 0
+    }
+  }
+
   render() {
 
     const data = [
-      (this.props.dietConfig[constants.fruits + 'MAX'] * 100) / this.props.dayTrack[constants.fruits],
-      (this.props.dietConfig[constants.carbo + 'MAX'] * 100) / this.props.dayTrack[constants.carbo],
-      (this.props.dietConfig[constants.snatch + 'MAX'] * 100) / this.props.dayTrack[constants.snatch]
+      this.getTypeProgress(constants.fruits),
+      this.getTypeProgress(constants.carbo),
+      this.getTypeProgress(constants.snatch)
     ]
 
+    console.log('data', data)
     return (
       <View style={generalStyles.container}>
-        <View style={{ height: 200, width:200, flexDirection: 'row' }}>
-          <ProgressChart />
-          </View>
-        {/* <DayTrackRow
+        <View style={{ flexDirection: 'row' }}>
+          <DayProgress
+            data={data}
+          />
+        </View>
+        <DayTrackRow
           description={constants.fruits}
           propValue={this.props.dayTrack[constants.fruits]}
           increment={() => { this.addFood(constants.fruits) }}
@@ -63,7 +76,7 @@ class DayTrackScreen extends React.Component {
           decrement={() => { this.subtractFood(constants.snatch) }}
           disableIncrement={this.props.dietConfig[constants.snatch + 'MAX'] === this.props.dayTrack[constants.snatch]}
           disableDecrement={this.props.dayTrack[constants.snatch] === 0}
-        /> */}
+        />
       </View>
     )
   }
