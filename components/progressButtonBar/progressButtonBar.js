@@ -12,7 +12,6 @@ class ProgressButtonBar extends React.Component {
     for (let index = 0; index < quantity; index++) {
       object[type + '-' + index] = {
         disable: styles.disable,
-        enable: { backgroundColor: "yellow" },
         class: 'disable'
       }
     }
@@ -25,7 +24,6 @@ class ProgressButtonBar extends React.Component {
       for (let index = 0; index < quantity; index++) {
         object[type + '-' + index] = {
           disable: styles.disable,
-          enable: { backgroundColor: "yellow" },
           class: 'disable'
         }
       }
@@ -33,7 +31,6 @@ class ProgressButtonBar extends React.Component {
       for (let index = 0; index < quantity; index++) {
         object[type + '-' + index] = {
           disable: styles.disable,
-          enable: { backgroundColor: "yellow" },
           class: index < actualValue ? 'enable' : 'disable'
         }
       }
@@ -60,7 +57,7 @@ class ProgressButtonBar extends React.Component {
     const { type } = this.props
     for (let index = 0; index <= position; index++) {
       this.setState({
-        [type + '-' + index]: { class: this.state[type + '-' + index].enable }
+        [type + '-' + index]: { class: 'enable' }
       })
     }
   }
