@@ -7,7 +7,8 @@
  */
 import React from 'react'
 import { createStackNavigator, createAppContainer } from 'react-navigation'
-import {initStore} from './redux/store';
+import { PersistGate } from 'redux-persist/integration/react'
+import store, { persistor } from './redux/store'
 import {Provider} from 'react-redux';
 import HomeScreen from './containers/homescreen'
 import MenuScreen from './containers/menuscreen'
@@ -15,12 +16,6 @@ import FoodDescScreen from './containers/foodDescScreen'
 import DietConfigScreen from './containers/dietConfigScreen'
 import DayTrackScreen from './containers/dayTrackScreen'
 
-
-if(__DEV__) {
-  import('./ReactotronConfig').then(() => console.log('Reactotron Configured'))
-}
-
-const store = initStore()
 
 const MainNavigator = createStackNavigator({
   Home: { screen: HomeScreen },
@@ -35,7 +30,9 @@ export const Appcontainer = createAppContainer(MainNavigator)
 export default () => {
   return(
   <Provider store={store}>
-    <Appcontainer />
+    <PersistGate loading={null} persistor={persistor}>
+      <Appcontainer />
+    </PersistGate>
   </Provider> 
   )
 }
