@@ -5,13 +5,12 @@ let reactotron = {}
 
 const SETTINGS = {
   useReactotron: __DEV__,
-  useSentry: !__DEV__
 }
 
 
 if (SETTINGS.useReactotron) {
   reactotron = Reactotron
-    .configure({ name: 'FoodTrack Demo' })// controls connection & communication settings
+    .configure()// controls connection & communication settings
     .useReactNative()
     .use(reactotronRedux()) // add all built-in react native plugins
     .connect() // let's connect!
