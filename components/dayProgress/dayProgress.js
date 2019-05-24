@@ -4,7 +4,6 @@ import { ProgressChart } from 'react-native-chart-kit'
 class DayProgress extends React.PureComponent {
 
   render() {
-    // const data = [0.4, 0.6, 0.8]
     const { data, chartConfig } = this.props
     defaultChartConfig={
       backgroundColor: '#e26a00',

@@ -30,22 +30,18 @@ class DayTrackScreen extends React.Component {
   getTypeProgress = (foodType) => {
     if ((this.props.dietConfig[foodType + 'MAX'] && this.props.dietConfig[foodType + 'MAX'] !== 0) &&
       (this.props.dayTrack[foodType] && this.props.dayTrack[foodType] !== 0)) {
-
-      return (this.props.dietConfig[foodType + 'MAX'] * 100) / this.props.dayTrack[foodType]
+      return this.props.dayTrack[foodType] / this.props.dietConfig[foodType + 'MAX']
     } else {
       return 0
     }
   }
 
   render() {
-
     const data = [
       this.getTypeProgress(constants.fruits),
       this.getTypeProgress(constants.carbo),
       this.getTypeProgress(constants.snatch)
     ]
-
-    console.log('data', data)
     return (
       <View style={generalStyles.container}>
         <View style={{ flexDirection: 'row' }}>
