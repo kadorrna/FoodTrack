@@ -6,9 +6,7 @@ class DayProgress extends React.PureComponent {
   render() {
     const { data, chartConfig } = this.props
     defaultChartConfig={
-      backgroundColor: '#e26a00',
-      backgroundGradientFrom: '#7e93f5',
-      backgroundGradientTo: '#f32b65',
+      backgroundColor:"transparent",
       decimalPlaces: 2, // optional, defaults to 2dp
       color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
       style: {

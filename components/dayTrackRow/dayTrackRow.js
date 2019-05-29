@@ -8,7 +8,7 @@ class DayTrackRow extends React.Component {
   render() {
     const {description, propValue, increment, decrement, disableIncrement, disableDecrement}= this.props
     return (
-      <View style={[generalStyles.row, styles.row ]}>
+      <View style={[generalStyles.row, styles.row]}>
         <Button
           title="-"
           type="outline"
